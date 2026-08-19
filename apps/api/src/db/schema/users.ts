@@ -6,8 +6,9 @@ import {
   timestamp,
   uniqueIndex,
 } from 'drizzle-orm/pg-core';
+import { PROVIDERS } from '@saeteum/shared';
 
-export const providerEnum = pgEnum('provider', ['google', 'kakao', 'naver']);
+export const providerEnum = pgEnum('provider', PROVIDERS);
 
 export const users = pgTable(
   'users',

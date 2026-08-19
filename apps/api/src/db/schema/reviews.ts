@@ -9,20 +9,10 @@ import {
   uniqueIndex,
   check,
 } from 'drizzle-orm/pg-core';
+import { EMOTION_TAGS } from '@saeteum/shared';
 import { missionDraws } from './mission_draws';
 
-export const emotionTagEnum = pgEnum('emotion_tag', [
-  'excitement',
-  'joy',
-  'pride',
-  'gratitude',
-  'curiosity',
-  'relief',
-  'freshness',
-  'indifference',
-  'awkwardness',
-  'regret',
-]);
+export const emotionTagEnum = pgEnum('emotion_tag', EMOTION_TAGS);
 
 export const reviews = pgTable(
   'reviews',
