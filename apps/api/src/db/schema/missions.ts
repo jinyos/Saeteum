@@ -1,15 +1,7 @@
 import { pgEnum, pgTable, serial, text, index } from 'drizzle-orm/pg-core';
+import { MISSION_CATEGORIES } from '@saeteum/shared';
 
-export const missionCategoryEnum = pgEnum('mission_category', [
-  'nature',
-  'exploration',
-  'connection',
-  'solitude',
-  'movement',
-  'creation',
-  'sensation',
-  'declutter',
-]);
+export const missionCategoryEnum = pgEnum('mission_category', MISSION_CATEGORIES);
 
 export const missions = pgTable(
   'missions',
