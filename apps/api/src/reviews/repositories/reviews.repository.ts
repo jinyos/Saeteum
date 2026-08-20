@@ -90,6 +90,16 @@ export class ReviewsRepository {
     return row;
   }
 
+  async hasReview(missionDrawId: string): Promise<boolean> {
+    const [row] = await db
+      .select({ id: reviews.id })
+      .from(reviews)
+      .where(eq(reviews.missionDrawId, missionDrawId))
+      .limit(1);
+
+    return row !== undefined;
+  }
+
   async findReviewWithMissionDraw(
     reviewId: string,
     userId: string,
