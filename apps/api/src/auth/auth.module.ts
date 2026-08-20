@@ -8,6 +8,7 @@ import { ExchangeCodeService } from './tokens/exchange-code.service';
 import { TokenService } from './tokens/token.service';
 import { UsersRepository } from './repositories/users.repository';
 import { RefreshTokensRepository } from './repositories/refresh-tokens.repository';
+import { TokenCleanupService } from './tokens/token-cleanup.service';
 import { OAuthProviderRegistry } from './providers/oauth-provider.registry';
 import { GoogleProvider } from './providers/implementations/google.provider';
 import { KakaoProvider } from './providers/implementations/kakao.provider';
@@ -29,6 +30,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
     TokenService,
     UsersRepository,
     RefreshTokensRepository,
+    TokenCleanupService,
     OAuthProviderRegistry,
     GoogleProvider,
     KakaoProvider,

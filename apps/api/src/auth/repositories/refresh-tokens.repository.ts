@@ -1,7 +1,7 @@
 import { db } from '@/db';
 import { refreshTokens } from '@/db/schema';
 import { Injectable } from '@nestjs/common';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, lt } from 'drizzle-orm';
 
 type RefreshToken = typeof refreshTokens.$inferSelect;
 
@@ -53,5 +53,14 @@ export class RefreshTokensRepository {
           eq(refreshTokens.tokenHash, tokenHash),
         ),
       );
+  }
+
+  async deleteExpired(now: Date): Promise<number> {
+    const deleted = await db
+      .delete(refreshTokens)
+      .where(lt(refreshTokens.expiresAt, now))
+      .returning({ id: refreshTokens.id });
+
+    return deleted.length;
   }
 }
