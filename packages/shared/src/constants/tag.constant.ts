@@ -12,3 +12,5 @@ export const EMOTION_TAGS = [
 ] as const;
 
 export type EmotionTag = (typeof EMOTION_TAGS)[number];
+
+export const MAX_REVIEW_TAGS = 3;
