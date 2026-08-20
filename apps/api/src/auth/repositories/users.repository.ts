@@ -33,4 +33,28 @@ export class UsersRepository {
 
     return user;
   }
+
+  async findById(id: string): Promise<User | null> {
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, id))
+      .limit(1);
+
+    return user ?? null;
+  }
+
+  async updateNickname(id: string, nickname: string): Promise<User | null> {
+    const [user] = await db
+      .update(users)
+      .set({ nickname })
+      .where(eq(users.id, id))
+      .returning();
+
+    return user ?? null;
+  }
+
+  async deleteById(id: string): Promise<void> {
+    await db.delete(users).where(eq(users.id, id));
+  }
 }
