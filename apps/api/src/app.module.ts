@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
 import { MeModule } from './me/me.module';
+import { MissionsModule } from './missions/missions.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { MeModule } from './me/me.module';
     ScheduleModule.forRoot(),
     AuthModule,
     MeModule,
+    MissionsModule,
   ],
   controllers: [],
   providers: [],
