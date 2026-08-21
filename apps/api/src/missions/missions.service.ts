@@ -3,6 +3,7 @@ import {
   CandidateMission,
   MissionDrawsRepository,
 } from './repositories/mission-draws.repository';
+import { ReviewsRepository } from '@/reviews/repositories/reviews.repository';
 import { getKstDayKey } from '@/common/utils/kst-day';
 import { AppException } from '@/common/exceptions/app.exception';
 import postgres from 'postgres';
@@ -16,6 +17,7 @@ export type MissionStatus =
       drawn: true;
       missionDrawId: string;
       mission: MissionSummary;
+      hasReview: boolean;
       drawnAt: Date;
     };
 
@@ -31,6 +33,7 @@ export class MissionsService {
 
   constructor(
     private readonly missionDrawsRepository: MissionDrawsRepository,
+    private readonly reviewsRepository: ReviewsRepository,
   ) {}
 
   async getTodayStatus(userId: string): Promise<MissionStatus> {
@@ -43,10 +46,15 @@ export class MissionsService {
       return { drawn: false };
     }
 
+    const hasReview = await this.reviewsRepository.hasReview(
+      drawn.missionDrawId,
+    );
+
     return {
       drawn: true,
       missionDrawId: drawn.missionDrawId,
       mission: { content: drawn.mission.content },
+      hasReview,
       drawnAt: drawn.drawnAt,
     };
   }

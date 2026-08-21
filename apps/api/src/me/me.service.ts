@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AppException } from '@/common/exceptions/app.exception';
 import { User, UsersRepository } from '@/auth/repositories/users.repository';
+import { StorageService } from '@/storage/storage.service';
 
 export type MeProfile = Pick<
   User,
@@ -18,7 +19,10 @@ function toProfile(user: User): MeProfile {
 
 @Injectable()
 export class MeService {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(
+    private readonly usersRepository: UsersRepository,
+    private readonly storageService: StorageService,
+  ) {}
 
   async getMe(userId: string): Promise<MeProfile> {
     const user = await this.usersRepository.findById(userId);
@@ -42,5 +46,6 @@ export class MeService {
 
   async deleteMe(userId: string): Promise<void> {
     await this.usersRepository.deleteById(userId);
+    await this.storageService.deleteAllForUser(userId);
   }
 }
