@@ -103,9 +103,9 @@ export class ReviewsRepository {
   async findReviewWithMissionDraw(
     reviewId: string,
     userId: string,
-  ): Promise<{ drawnAt: Date } | null> {
+  ): Promise<{ drawnAt: Date; photoPath: string | null } | null> {
     const [row] = await db
-      .select({ drawnAt: missionDraws.drawnAt })
+      .select({ drawnAt: missionDraws.drawnAt, photoPath: reviews.photoPath })
       .from(reviews)
       .innerJoin(missionDraws, eq(reviews.missionDrawId, missionDraws.id))
       .where(and(eq(reviews.id, reviewId), eq(missionDraws.userId, userId)))

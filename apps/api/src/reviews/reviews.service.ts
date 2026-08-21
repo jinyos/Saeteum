@@ -4,6 +4,7 @@ import { ReviewsRepository } from './repositories/reviews.repository';
 import { AppException } from '@/common/exceptions/app.exception';
 import { getKstDayKey } from '@/common/utils/kst-day';
 import { UNIQUE_VIOLATION } from '@/common/constants';
+import { StorageService } from '@/storage/storage.service';
 import postgres from 'postgres';
 
 export type CreateReviewInput = {
@@ -18,7 +19,7 @@ export type ReviewDetail = {
   reviewId: string;
   mission: { content: string };
   rating: number | null;
-  photoPath: string | null;
+  photoUrl: string | null;
   content: string | null;
   emotionTags: EmotionTag[] | null;
   editable: boolean;
@@ -26,7 +27,16 @@ export type ReviewDetail = {
 
 @Injectable()
 export class ReviewsService {
-  constructor(private readonly reviewsRepository: ReviewsRepository) {}
+  constructor(
+    private readonly reviewsRepository: ReviewsRepository,
+    private readonly storageService: StorageService,
+  ) {}
+
+  async createPhotoUploadUrl(
+    userId: string,
+  ): Promise<{ uploadUrl: string; photoPath: string }> {
+    return this.storageService.createUploadUrl(userId);
+  }
 
   async create(
     userId: string,
@@ -121,12 +131,15 @@ export class ReviewsService {
       throw new AppException('RESOURCE_NOT_FOUND', 'Review not found.');
     }
 
+    const photoUrl = review.photoPath
+      ? await this.storageService.createReadUrl(review.photoPath)
+      : null;
+
     return {
       reviewId: review.id,
       mission: { content: context.mission.content },
       rating: review.rating,
-      // Storage 연동 전이라 signed URL 변환 없이 저장된 경로를 그대로 내려준다.
-      photoPath: review.photoPath,
+      photoUrl,
       content: review.content,
       emotionTags: review.emotionTags,
       editable: getKstDayKey(context.drawnAt) === getKstDayKey(),
@@ -151,5 +164,9 @@ export class ReviewsService {
     }
 
     await this.reviewsRepository.remove(reviewId);
+
+    if (target.photoPath) {
+      await this.storageService.deleteObject(target.photoPath);
+    }
   }
 }

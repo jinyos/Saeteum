@@ -26,6 +26,14 @@ export class ReviewsController {
     return this.reviewsService.create(user.id, dto);
   }
 
+  @ApiOperation({ summary: '후기 사진 업로드 URL 발급' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Post('photos')
+  createPhotoUploadUrl(@CurrentUser() user: { id: string }) {
+    return this.reviewsService.createPhotoUploadUrl(user.id);
+  }
+
   @ApiOperation({ summary: '후기 단건 조회' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)

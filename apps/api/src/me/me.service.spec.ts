@@ -8,9 +8,11 @@
  *   4. 사용자가 존재하지 않으면 AppException(RESOURCE_NOT_FOUND)을 던진다.
  * deleteMe
  *   5. 사용자 id로 삭제를 위임한다.
+ *   6. 사용자의 사진 storage prefix를 정리한다.
  */
 import { AppException } from '@/common/exceptions/app.exception';
 import { UsersRepository } from '@/auth/repositories/users.repository';
+import { StorageService } from '@/storage/storage.service';
 import { MeService } from './me.service';
 
 const user = {
@@ -28,9 +30,13 @@ function buildService() {
     deleteById: jest.fn(),
   } as unknown as jest.Mocked<UsersRepository>;
 
-  const service = new MeService(usersRepository);
+  const storageService = {
+    deleteAllForUser: jest.fn(),
+  } as unknown as jest.Mocked<StorageService>;
 
-  return { service, usersRepository };
+  const service = new MeService(usersRepository, storageService);
+
+  return { service, usersRepository, storageService };
 }
 
 describe('MeService: getMe', () => {
@@ -100,9 +106,10 @@ describe('MeService: updateNickname', () => {
 describe('MeService: deleteMe', () => {
   let service: MeService;
   let usersRepository: jest.Mocked<UsersRepository>;
+  let storageService: jest.Mocked<StorageService>;
 
   beforeEach(() => {
-    ({ service, usersRepository } = buildService());
+    ({ service, usersRepository, storageService } = buildService());
   });
 
   // 5
@@ -110,5 +117,12 @@ describe('MeService: deleteMe', () => {
     await service.deleteMe('user-1');
 
     expect(usersRepository.deleteById).toHaveBeenCalledWith('user-1');
+  });
+
+  // 6
+  it('clean up the user photo storage prefix', async () => {
+    await service.deleteMe('user-1');
+
+    expect(storageService.deleteAllForUser).toHaveBeenCalledWith('user-1');
   });
 });
