@@ -1,3 +1,8 @@
+import { Clover } from '@/common/doodles/Clover';
+import { Flower } from '@/common/doodles/Flower';
+import { PaperAirplane } from '@/common/doodles/PaperAirplane';
+import { Smile } from '@/common/doodles/Smile';
+
 const WHITE_BAND_FILL =
   'M0,4 Q15,0 30,8 Q50,1 65,7 Q85,2 100,5 L100,15 Q92,18 84,14 Q76,20 68,15 Q60,21 52,14 Q44,19 36,14 Q28,20 20,15 Q12,17 6,14 Q3,19 0,14 Z';
 
@@ -51,6 +56,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             }}
           />
         </div>
+      </div>
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 mx-auto max-w-md"
+      >
+        <Clover className="absolute bottom-5 left-10 size-20 text-point-green opacity-30" />
+        <Smile className="absolute bottom-20 left-25 size-20 text-point-yellow opacity-30" />
+        <Flower className="absolute bottom-10 right-25 size-20 text-point-red opacity-30" />
+        <PaperAirplane className="absolute bottom-30 right-5 size-18 text-point-blue opacity-30" />
       </div>
     </div>
   );
