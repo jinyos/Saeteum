@@ -1,0 +1,37 @@
+@theme inline {
+  /* Base */
+  --color-base-background: #efe7d8;
+  --color-base-paper: #fcfaf4;
+
+  /* Ink */
+  --color-ink-primary: #33302a;
+  --color-ink-secondary: #6b6355;
+  --color-ink-tertiary: #c9bea9;
+
+  /* Point */
+  --color-point-red: #f87d79;
+  --color-point-green: #53c68c;
+  --color-point-yellow: #f7bc33;
+  --color-point-blue: #42a5d7;
+
+  /* Category */
+  --color-category-nature: #7bcb3d;
+  --color-category-exploration: #f05a3c;
+  --color-category-connection: #9b59d0;
+  --color-category-solitude: #d6c43a;
+  --color-category-movement: #35b8c8;
+  --color-category-creation: #e94b8a;
+  --color-category-sensation: #ff8a3d;
+  --color-category-declutter: #635bdb;
+
+  /* Typography */
+  --font-heading:
+    var(--font-heading-loaded), ui-sans-serif, system-ui, 'Apple SD Gothic Neo',
+    'Malgun Gothic', sans-serif;
+  --font-body:
+    var(--font-body-loaded), ui-sans-serif, system-ui, 'Apple SD Gothic Neo',
+    'Malgun Gothic', sans-serif;
+  --font-caption:
+    var(--font-caption-loaded), ui-sans-serif, system-ui, 'Apple SD Gothic Neo',
+    'Malgun Gothic', sans-serif;
+}
