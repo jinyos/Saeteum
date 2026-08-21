@@ -6,6 +6,7 @@ import { MeModule } from './me/me.module';
 import { MissionsModule } from './missions/missions.module';
 import { RecordsModule } from './records/records.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ReviewsModule } from './reviews/reviews.module';
     MissionsModule,
     ReviewsModule,
     RecordsModule,
+    StatsModule,
   ],
   controllers: [],
   providers: [],
