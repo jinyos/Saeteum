@@ -7,7 +7,9 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "tsc && tsc-alias",
+    "predev": "lsof -ti tcp:4000 | xargs kill -9 2>/dev/null || true",
     "dev": "nest start --watch",
+    "prestart": "lsof -ti tcp:4000 | xargs kill -9 2>/dev/null || true",
     "start": "node dist/main.js",
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests",
