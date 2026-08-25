@@ -21,10 +21,58 @@ const RULED_LINES_BACKGROUND = `
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-dvh bg-base-background">
+      <svg aria-hidden className="absolute h-0 w-0">
+        <defs>
+          <filter
+            id="hand-rough"
+            x="-10%"
+            y="-10%"
+            width="120%"
+            height="120%"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.2"
+              numOctaves="2"
+              seed="7"
+              result="noise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="1.8"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+          <filter
+            id="hand-rough-hover"
+            x="-10%"
+            y="-10%"
+            width="120%"
+            height="120%"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.12"
+              numOctaves="2"
+              seed="23"
+              result="noise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="3.5"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
       <div className="relative mx-auto min-h-dvh max-w-md">
         <div className="pt-2">
           <div
-            className="mt-3 min-h-dvh bg-base-paper px-4 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
+            className="mt-3 h-[calc(100dvh-1.25rem)] bg-base-paper px-4 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
             style={{ backgroundImage: RULED_LINES_BACKGROUND }}
           >
             {children}

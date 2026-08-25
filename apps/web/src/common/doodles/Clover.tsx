@@ -1,14 +1,8 @@
+import { DoodleIcon } from './DoodleIcon';
+
 export function Clover({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 48 48"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
+    <DoodleIcon className={className}>
       <path
         d="M24 24
         C21 22 17 19 17 15
@@ -31,6 +25,6 @@ export function Clover({ className }: { className?: string }) {
         C28 34 26 28 24 24Z"
       />
       <path d="M24 24 C24 30 23 35 21 40" />
-    </svg>
+    </DoodleIcon>
   );
 }

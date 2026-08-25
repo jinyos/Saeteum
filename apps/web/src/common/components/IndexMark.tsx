@@ -1,16 +1,18 @@
 import Link from 'next/link';
 
+type IndexMarkProps = {
+  href: string;
+  label: string;
+  active: boolean;
+  activeColor?: string;
+};
+
 export function IndexMark({
   href,
   label,
   active,
   activeColor = 'bg-point-yellow',
-}: {
-  href: string;
-  label: string;
-  active: boolean;
-  activeColor?: string;
-}) {
+}: IndexMarkProps) {
   return (
     <Link
       href={href}
