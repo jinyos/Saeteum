@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HighlightMark } from '@/common/layouts/HighlightMark';
+import { HighlightMark } from '@/common/components/HighlightMark';
 
 export function NavLink({
   href,

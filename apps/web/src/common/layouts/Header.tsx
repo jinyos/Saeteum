@@ -1,6 +1,6 @@
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
-import { HighlightMark } from '@/common/layouts/HighlightMark';
+import { HighlightMark } from '@/common/components/HighlightMark';
 import { NavLink } from '@/common/layouts/NavLink';
 
 type HeaderVariant = 'none' | 'icon' | 'nav';

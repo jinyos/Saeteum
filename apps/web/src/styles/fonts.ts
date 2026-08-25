@@ -24,10 +24,10 @@ const wantedSans = localFont({
   display: "swap",
 });
 
-const gangwonEduModu = localFont({
-  src: "../fonts/GangwonEduModu-Light.otf",
+const kyoboHandwriting = localFont({
+  src: "../fonts/KyoboHandwriting2025lyb.otf",
   variable: "--font-caption-loaded",
   display: "swap",
 });
 
-export const fontVariables = `${cafe24ProSlimAir.variable} ${cafe24ProSlimFit.variable} ${cafe24ProSlimMax.variable} ${wantedSans.variable} ${gangwonEduModu.variable}`;
+export const fontVariables = `${cafe24ProSlimAir.variable} ${cafe24ProSlimFit.variable} ${cafe24ProSlimMax.variable} ${wantedSans.variable} ${kyoboHandwriting.variable}`;
