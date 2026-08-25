@@ -13,6 +13,7 @@
     "pretest": "pnpm --filter @saeteum/shared build",
     "test": "pnpm -r --if-present run test",
     "test:e2e": "playwright test",
+    "ports:kill": "lsof -ti tcp:3000,4000 | xargs kill -9 2>/dev/null || true",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
