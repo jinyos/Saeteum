@@ -3,15 +3,11 @@ import Link from 'next/link';
 import { HighlightMark } from '@/common/components/HighlightMark';
 import { NavLink } from '@/common/layouts/NavLink';
 
-type HeaderVariant = 'none' | 'icon' | 'nav';
+type HeaderVariant = 'icon' | 'nav';
 
 export function Header({ variant }: { variant: HeaderVariant }) {
-  if (variant === 'none') {
-    return null;
-  }
-
   return (
-    <header className="flex items-center justify-between pt-4 pb-1">
+    <header className="relative z-10 flex items-center justify-between pt-4 pb-1">
       <Link
         href="/"
         className="relative -ml-3 px-3 py-2.5 text-xl text-ink-primary"
