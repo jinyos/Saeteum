@@ -4,7 +4,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { useOAuthCallback } from './hooks/useOAuthCallback';
 import { Spinner } from '@/common/components/Spinner';
 import LandingContainer from '@/domain/Landing/LandingContainer';
-import MissionsContainer from '@/domain/Missions/components/MissionsContainer';
+import MissionsContainer from '@/domain/Missions/MissionsContainer';
 
 export default function HomeContainer() {
   const { isAuthenticated, isLoading } = useAuth();
