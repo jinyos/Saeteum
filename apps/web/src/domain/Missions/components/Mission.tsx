@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { useTodayMission } from '@/domain/Missions/hooks/useTodayMission';
 
-const POSTIT_CLASS =
+export const POSTIT_CLASS =
   'absolute inset-0 flex items-center justify-center rounded-md border-2 border-ink-primary bg-white px-8 text-center shadow-md filter-[url(#hand-rough)]';
 
 export function Mission() {
