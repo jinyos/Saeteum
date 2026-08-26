@@ -75,6 +75,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             className="mt-3 h-[calc(100dvh-1.25rem)] bg-base-paper px-4 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
             style={{ backgroundImage: RULED_LINES_BACKGROUND }}
           >
+            <div
+              aria-hidden
+              className="pointer-events-none fixed inset-0 mx-auto max-w-md"
+            >
+              <Clover className="absolute bottom-5 left-10 size-20 text-point-green opacity-30" />
+              <Smile className="absolute bottom-20 left-25 size-20 text-point-yellow opacity-30" />
+              <Flower className="absolute bottom-10 right-25 size-20 text-point-red opacity-30" />
+              <PaperAirplane className="absolute bottom-30 right-5 size-18 text-point-blue opacity-30" />
+            </div>
             {children}
           </div>
         </div>
@@ -104,15 +113,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             }}
           />
         </div>
-      </div>
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 mx-auto max-w-md"
-      >
-        <Clover className="absolute bottom-5 left-10 size-20 text-point-green opacity-30" />
-        <Smile className="absolute bottom-20 left-25 size-20 text-point-yellow opacity-30" />
-        <Flower className="absolute bottom-10 right-25 size-20 text-point-red opacity-30" />
-        <PaperAirplane className="absolute bottom-30 right-5 size-18 text-point-blue opacity-30" />
       </div>
     </div>
   );
