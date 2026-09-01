@@ -5,7 +5,7 @@ import { LoginButton } from './components/LoginButton';
 
 export default function LandingContainer() {
   return (
-    <div className="flex min-h-full -translate-y-5 flex-col items-center justify-center gap-20 text-center">
+    <div className="flex min-h-[calc(100dvh-1.25rem)] -translate-y-5 flex-col items-center justify-center gap-20 text-center">
       <div aria-hidden className="pointer-events-none fixed inset-0 mx-auto max-w-md">
         <Man className="absolute top-25 left-4 size-24 rotate-18 text-ink-tertiary opacity-50" />
         <Woman className="absolute top-12 right-4 size-24 -rotate-12 text-ink-tertiary opacity-50" />
