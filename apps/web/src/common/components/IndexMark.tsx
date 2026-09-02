@@ -1,10 +1,26 @@
 import Link from 'next/link';
 
+type IndexMarkSize = 'sm' | 'lg';
+
 type IndexMarkProps = {
-  href: string;
+  href?: string;
   label: string;
   active: boolean;
   activeColor?: string;
+  size?: IndexMarkSize;
+  className?: string;
+};
+
+const SIZE_CLASS: Record<
+  IndexMarkSize,
+  { root: string; label: string; bar: string }
+> = {
+  sm: { root: 'border text-xs', label: 'px-2 py-0.5', bar: 'w-2' },
+  lg: {
+    root: 'w-full border-2 text-lg bg-white filter-[url(#hand-rough)]',
+    label: 'flex-1 py-3 text-center',
+    bar: 'w-6',
+  },
 };
 
 export function IndexMark({
@@ -12,20 +28,33 @@ export function IndexMark({
   label,
   active,
   activeColor = 'bg-point-yellow',
+  size = 'sm',
+  className = '',
 }: IndexMarkProps) {
-  return (
-    <Link
-      href={href}
-      className={`flex items-stretch overflow-hidden border text-xs ${
-        active
-          ? 'border-ink-secondary text-ink-primary'
-          : 'border-ink-tertiary text-ink-secondary'
-      }`}
-    >
-      <span className="px-2 py-0.5">{label}</span>
+  const sizeClass = SIZE_CLASS[size];
+  const rootClassName = `inline-flex items-stretch justify-between overflow-hidden ${
+    href ? 'transition-transform active:scale-[0.98]' : ''
+  } ${sizeClass.root} ${
+    active
+      ? 'border-ink-secondary text-ink-primary'
+      : 'border-ink-tertiary text-ink-secondary'
+  } ${className}`;
+  const content = (
+    <>
+      <span className={sizeClass.label}>{label}</span>
       <span
-        className={`w-2 ${active ? activeColor : 'bg-ink-tertiary/30'}`}
+        className={`${sizeClass.bar} ${active ? activeColor : 'bg-ink-tertiary/30'}`}
       />
+    </>
+  );
+
+  if (!href) {
+    return <div className={rootClassName}>{content}</div>;
+  }
+
+  return (
+    <Link href={href} className={rootClassName}>
+      {content}
     </Link>
   );
 }

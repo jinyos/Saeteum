@@ -4,3 +4,4 @@ export * from './auth.constant';
 export * from './tag.constant';
 export * from './photo.constant';
 export * from './rating.constant';
+export * from './category.constant';
