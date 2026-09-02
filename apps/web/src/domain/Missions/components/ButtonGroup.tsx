@@ -8,11 +8,7 @@ export function ButtonGroup() {
 
   return (
     <div className="flex gap-4">
-      {data.drawn ? (
-        <Button href="/reviews/new" width="w-32" height="h-11" color="red">
-          리뷰 작성하기
-        </Button>
-      ) : (
+      {!data.drawn ? (
         <Button
           onClick={() => drawMission()}
           disabled={isPending}
@@ -21,6 +17,14 @@ export function ButtonGroup() {
           color="red"
         >
           미션 뽑기
+        </Button>
+      ) : data.hasReview ? (
+        <Button href={`/reviews/${data.missionDrawId}`} width="w-32" height="h-11" color="green">
+          후기 보기
+        </Button>
+      ) : (
+        <Button href="/reviews/new" width="w-32" height="h-11" color="yellow">
+          후기 작성하기
         </Button>
       )}
       <Button href="/mypage/records" width="w-32" height="h-11" color="blue">
