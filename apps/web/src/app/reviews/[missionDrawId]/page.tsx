@@ -1,3 +1,9 @@
-export default function ReviewsDetailPage() {
-  return <div>리뷰 상세 페이지</div>;
+import ReviewDetailContainer from '@/domain/Reviews/ReviewDetailContainer';
+
+export default async function ReviewsDetailPage({
+  params,
+}: PageProps<'/reviews/[missionDrawId]'>) {
+  const { missionDrawId } = await params;
+
+  return <ReviewDetailContainer missionDrawId={missionDrawId} />;
 }
