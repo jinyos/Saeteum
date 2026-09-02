@@ -12,7 +12,7 @@ export default function HomeContainer() {
 
   if (isLoading || isExchanging) {
     return (
-      <div className="flex min-h-full items-center justify-center">
+      <div className="flex min-h-[calc(100dvh-1.25rem)] items-center justify-center">
         <Spinner className="size-16 text-ink-tertiary" />
       </div>
     );

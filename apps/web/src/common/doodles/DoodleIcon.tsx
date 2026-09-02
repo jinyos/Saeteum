@@ -6,6 +6,7 @@ type DoodleIconProps = {
 export function DoodleIcon({ className, children }: DoodleIconProps) {
   return (
     <svg
+      aria-hidden="true"
       viewBox="0 0 48 48"
       fill="none"
       stroke="currentColor"

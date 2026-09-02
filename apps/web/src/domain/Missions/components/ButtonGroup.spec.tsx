@@ -2,8 +2,9 @@
  * 검증 포인트:
  * 1. 아직 안 뽑았으면 "미션 뽑기" 버튼이 보이고 클릭 시 drawMission을 호출한다.
  * 2. 뽑는 중(isPending)이면 "미션 뽑기" 버튼이 비활성화된다.
- * 3. 이미 뽑았으면 "리뷰 작성하기" 링크(/reviews/new)가 보인다.
- * 4. "기록 보기" 링크(/mypage/records)는 항상 보인다.
+ * 3. 뽑았고 후기가 없으면 "후기 작성하기" 링크(/reviews/new)가 보인다.
+ * 4. 뽑았고 후기가 있으면 "후기 보기" 링크(/reviews/:missionDrawId)가 보인다.
+ * 5. "기록 보기" 링크(/mypage/records)는 항상 보인다.
  */
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useTodayMission } from '@/domain/Missions/hooks/useTodayMission';
@@ -20,9 +21,18 @@ jest.mock('@/domain/Missions/hooks/useDrawMission', () => ({
 const mockedUseTodayMission = jest.mocked(useTodayMission);
 const mockedUseDrawMission = jest.mocked(useDrawMission);
 
-function mockTodayMission(drawn: boolean) {
+function mockTodayMission(
+  drawn: boolean,
+  options: { hasReview?: boolean; missionDrawId?: string } = {},
+) {
   mockedUseTodayMission.mockReturnValue({
-    data: { drawn },
+    data: drawn
+      ? {
+          drawn: true,
+          hasReview: options.hasReview ?? false,
+          missionDrawId: options.missionDrawId ?? 'draw-1',
+        }
+      : { drawn: false },
   } as unknown as ReturnType<typeof useTodayMission>);
 }
 
@@ -61,19 +71,32 @@ describe('ButtonGroup', () => {
   });
 
   // 3
-  it('show the review-write link when drawn', () => {
-    mockTodayMission(true);
+  it('show the review-write link when drawn without a review', () => {
+    mockTodayMission(true, { hasReview: false });
     mockDrawMission();
 
     render(<ButtonGroup />);
 
-    expect(screen.getByRole('link', { name: '리뷰 작성하기' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: '후기 작성하기' })).toHaveAttribute(
       'href',
       '/reviews/new',
     );
   });
 
   // 4
+  it('show the review-view link when drawn with a review', () => {
+    mockTodayMission(true, { hasReview: true, missionDrawId: 'draw-1' });
+    mockDrawMission();
+
+    render(<ButtonGroup />);
+
+    expect(screen.getByRole('link', { name: '후기 보기' })).toHaveAttribute(
+      'href',
+      '/reviews/draw-1',
+    );
+  });
+
+  // 5
   it('always show the records link', () => {
     mockTodayMission(false);
     mockDrawMission();

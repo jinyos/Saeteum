@@ -19,6 +19,8 @@ type ButtonStyleProps = {
   width?: string;
   height?: string;
   className?: string;
+  highlightWidth?: string;
+  highlightHeight?: string;
 };
 
 function getButtonClassName({
@@ -30,7 +32,7 @@ function getButtonClassName({
   className = '',
 }: ButtonStyleProps) {
   if (variant === 'highlight') {
-    return `relative inline-flex cursor-pointer items-center justify-center px-2 py-1 ${danger ? 'text-point-red' : 'text-ink-primary'} ${width} ${height} ${className}`;
+    return `group relative inline-flex cursor-pointer items-center justify-center px-2 py-1 ${danger ? 'text-point-red' : 'text-ink-primary'} ${width} ${height} ${className}`;
   }
 
   return `inline-flex cursor-pointer items-center justify-center rounded-md border-2 border-ink-primary bg-base-paper px-4 py-2 text-ink-primary transition-colors active:scale-95 filter-[url(#hand-rough)] hover:filter-[url(#hand-rough-hover)] ${
@@ -41,17 +43,23 @@ function getButtonClassName({
 function ButtonContent({
   variant = 'border',
   danger = false,
+  highlightWidth,
+  highlightHeight,
   children,
 }: {
   variant?: ButtonVariant;
   danger?: boolean;
+  highlightWidth?: string;
+  highlightHeight?: string;
   children: React.ReactNode;
 }) {
   if (variant === 'highlight') {
     return (
       <>
         <HighlightMark
-          className={`${danger ? 'text-point-red' : 'text-point-yellow'} opacity-25 transition-opacity hover:opacity-50 active:opacity-50`}
+          width={highlightWidth}
+          height={highlightHeight}
+          className={`${danger ? 'text-point-red' : 'text-point-yellow'} opacity-25 transition-opacity group-hover:opacity-50 group-active:opacity-50`}
         />
         <span className="relative">{children}</span>
       </>
@@ -80,6 +88,8 @@ export function Button({
   width = '',
   height = '',
   className = '',
+  highlightWidth,
+  highlightHeight,
   href,
   children,
   ...props
@@ -100,7 +110,12 @@ export function Button({
         className={buttonClassName}
         {...(props as Omit<AsLinkProps, keyof ButtonStyleProps | 'href' | 'children'>)}
       >
-        <ButtonContent variant={variant} danger={danger}>
+        <ButtonContent
+        variant={variant}
+        danger={danger}
+        highlightWidth={highlightWidth}
+        highlightHeight={highlightHeight}
+      >
           {children}
         </ButtonContent>
       </Link>
@@ -112,7 +127,12 @@ export function Button({
       className={buttonClassName}
       {...(props as Omit<AsButtonProps, keyof ButtonStyleProps | 'href' | 'children'>)}
     >
-      <ButtonContent variant={variant} danger={danger}>
+      <ButtonContent
+        variant={variant}
+        danger={danger}
+        highlightWidth={highlightWidth}
+        highlightHeight={highlightHeight}
+      >
         {children}
       </ButtonContent>
     </button>

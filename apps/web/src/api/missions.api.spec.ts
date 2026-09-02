@@ -1,9 +1,11 @@
 /**
  * 검증 포인트:
- * 1. getTodayMission은 GET /missions/today로 authorizedFetch를 호출하고 결과를 그대로 반환한다.
- * 2. getTodayMission은 authorizedFetch가 실패하면 에러를 그대로 전파한다.
- * 3. drawMission은 POST /missions/draw로 authorizedFetch를 호출하고 결과를 그대로 반환한다.
- * 4. drawMission은 authorizedFetch가 실패하면 에러를 그대로 전파한다.
+ * getTodayMission
+ *   1. GET /missions/today로 authorizedFetch를 호출하고 결과를 그대로 반환한다.
+ *   2. authorizedFetch가 실패하면 에러를 그대로 전파한다.
+ * drawMission
+ *   3. POST /missions/draw로 authorizedFetch를 호출하고 결과를 그대로 반환한다.
+ *   4. authorizedFetch가 실패하면 에러를 그대로 전파한다.
  */
 import { authorizedFetch } from '@/lib/auth/authorizedFetch';
 import { drawMission, getTodayMission } from './missions.api';

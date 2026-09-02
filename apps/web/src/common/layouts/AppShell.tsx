@@ -72,7 +72,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="relative mx-auto min-h-dvh max-w-md">
         <div className="pt-2">
           <div
-            className="mt-3 h-[calc(100dvh-1.25rem)] bg-base-paper px-4 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
+            className="mt-3 min-h-[calc(100dvh-1.25rem)] bg-base-paper px-4 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
             style={{ backgroundImage: RULED_LINES_BACKGROUND }}
           >
             <div
