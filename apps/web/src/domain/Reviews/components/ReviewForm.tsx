@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import type { EmotionTag } from '@saeteum/shared';
 import { Button } from '@/common/components/Button';
-import { MissionCard } from './MissionCard';
+import { MissionCard } from '@/common/components/MissionCard';
 import { RatingInput } from './RatingInput';
 import { PhotoInput } from './PhotoInput';
 import { ContentInput } from './ContentInput';

@@ -1,3 +1,15 @@
-export default function CategoryDetailPage() {
-  return <div>카테고리 상세 페이지</div>;
+import { notFound } from 'next/navigation';
+import { isMissionCategory } from '@/common/constants';
+import CategoryDetailContainer from '@/domain/Records/CategoryDetailContainer';
+
+export default async function CategoryDetailPage({
+  params,
+}: PageProps<'/mypage/records/[category]'>) {
+  const { category } = await params;
+
+  if (!isMissionCategory(category)) {
+    notFound();
+  }
+
+  return <CategoryDetailContainer category={category} />;
 }
