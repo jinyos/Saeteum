@@ -36,3 +36,9 @@ export async function clearRefreshTokenCookie(): Promise<void> {
 
   cookieStore.delete({ name: REFRESH_TOKEN_COOKIE, path: '/api/auth' });
 }
+
+export async function clearSessionCookie(): Promise<void> {
+  const cookieStore = await cookies();
+
+  cookieStore.delete({ name: SESSION_COOKIE, path: '/' });
+}

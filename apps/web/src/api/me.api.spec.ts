@@ -4,9 +4,11 @@
  *   1. GET /me로 authorizedFetch를 호출하고 결과를 그대로 반환한다.
  * updateNickname
  *   2. PATCH /me로 nickname을 담아 authorizedFetch를 호출하고 결과를 그대로 반환한다.
+ * deleteMe
+ *   3. DELETE /me로 authorizedFetch를 호출한다.
  */
 import { authorizedFetch } from '@/lib/auth/authorizedFetch';
-import { getMe, updateNickname } from './me.api';
+import { deleteMe, getMe, updateNickname } from './me.api';
 
 jest.mock('@/lib/auth/authorizedFetch', () => ({
   authorizedFetch: jest.fn(),
@@ -48,6 +50,23 @@ describe('updateNickname', () => {
     expect(mockedAuthorizedFetch).toHaveBeenCalledWith('/me', {
       method: 'PATCH',
       body: JSON.stringify({ nickname: '새틈이' }),
+    });
+  });
+});
+
+describe('deleteMe', () => {
+  beforeEach(() => {
+    mockedAuthorizedFetch.mockReset();
+  });
+
+  // 3
+  it('call authorizedFetch with DELETE /me', async () => {
+    mockedAuthorizedFetch.mockResolvedValue(undefined);
+
+    await deleteMe();
+
+    expect(mockedAuthorizedFetch).toHaveBeenCalledWith('/me', {
+      method: 'DELETE',
     });
   });
 });

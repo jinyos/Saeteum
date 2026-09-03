@@ -18,3 +18,9 @@ export function updateNickname(nickname: string): Promise<Me> {
     body: JSON.stringify({ nickname }),
   });
 }
+
+export function deleteMe(): Promise<void> {
+  return authorizedFetch<void>('/me', {
+    method: 'DELETE',
+  });
+}
