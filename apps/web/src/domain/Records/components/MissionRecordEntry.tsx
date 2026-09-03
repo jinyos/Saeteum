@@ -1,14 +1,7 @@
 import { Star } from 'lucide-react';
 import { EMOTION_TAG_LABEL, RATING_VALUES } from '@/common/constants';
+import { formatDate } from '@/common/utils/formatDate';
 import type { MissionDraw } from '@/api/records.api';
-
-function formatDrawnAt(drawnAt: string) {
-  return new Date(drawnAt).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
 
 interface MissionRecordEntryProps {
   draw: MissionDraw;
@@ -21,7 +14,7 @@ export function MissionRecordEntry({ draw }: MissionRecordEntryProps) {
   return (
     <div className="flex flex-col gap-4 rounded-md border-2 border-ink-primary bg-white px-6 py-6 filter-[url(#hand-rough)]">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-ink-secondary">{formatDrawnAt(draw.drawnAt)}</p>
+        <p className="text-sm text-ink-secondary">{formatDate(draw.drawnAt)}</p>
         {rating !== null && rating !== undefined && (
           <div className="flex gap-1" aria-label={`별점 ${rating}점`}>
             {RATING_VALUES.map((star) => (
