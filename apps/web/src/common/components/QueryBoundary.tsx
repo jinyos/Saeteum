@@ -11,7 +11,7 @@ export function ErrorFallback({
   resetErrorBoundary,
 }: ErrorFallbackProps) {
   return (
-    <div className="flex flex-col items-center gap-3 py-10 text-center">
+    <div className="flex flex-col items-center gap-10 py-10 text-center">
       <p className="text-ink-secondary">불러오지 못했어요.</p>
       <Button onClick={resetErrorBoundary}>다시 시도</Button>
     </div>
