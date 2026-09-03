@@ -42,7 +42,7 @@ function ReviewFormBody() {
 
 export default function ReviewFormContainer() {
   return (
-    <div className="mx-auto w-[85%] py-6">
+    <div className="mx-auto flex w-[85%] flex-1 flex-col py-6">
       <QueryBoundary pendingFallback={<Spinner className="mx-auto h-8 w-8" />}>
         <ReviewFormBody />
       </QueryBoundary>

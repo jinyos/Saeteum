@@ -35,11 +35,11 @@ function CategoryDetailBody({ category }: CategoryDetailBodyProps) {
 
       <CategoryMissionGrid category={category} missions={missions} />
 
-      <div className="mt-10 flex justify-center">
+      <div className="mt-auto mb-4 flex justify-center pt-4">
         <Button
           href="/mypage/records"
           variant="highlight"
-          highlightWidth="w-14"
+          highlightWidth="w-18"
           highlightHeight="h-[85%]"
         >
           돌아가기
@@ -57,7 +57,7 @@ export default function CategoryDetailContainer({
   category,
 }: CategoryDetailContainerProps) {
   return (
-    <div className="mx-auto w-[85%] py-6">
+    <div className="mx-auto flex w-[85%] flex-1 flex-col py-6">
       <QueryBoundary pendingFallback={<CategoryDetailSkeleton />}>
         <CategoryDetailBody category={category} />
       </QueryBoundary>

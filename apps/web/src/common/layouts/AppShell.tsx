@@ -81,7 +81,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             >
               <Clover className="absolute bottom-5 left-10 size-20 text-point-green opacity-30" />
               <Smile className="absolute bottom-20 left-25 size-20 text-point-yellow opacity-30" />
-              <Flower className="absolute bottom-10 right-25 size-20 text-point-red opacity-30" />
+              <Flower className="absolute bottom-15 right-25 size-20 text-point-red opacity-30" />
               <PaperAirplane className="absolute bottom-30 right-5 size-18 text-point-blue opacity-30" />
             </div>
             {children}
