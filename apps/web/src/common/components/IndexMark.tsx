@@ -4,7 +4,7 @@ type IndexMarkSize = 'sm' | 'lg';
 
 type IndexMarkProps = {
   href?: string;
-  label: string;
+  label: React.ReactNode;
   active: boolean;
   activeColor?: string;
   size?: IndexMarkSize;

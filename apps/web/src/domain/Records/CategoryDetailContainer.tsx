@@ -7,26 +7,33 @@ import { QueryBoundary } from '@/common/components/QueryBoundary';
 import { CATEGORY_BG_CLASS, CATEGORY_LABEL } from '@/common/constants';
 import { CategoryMissionGrid } from './components/CategoryMissionGrid';
 import { CategoryDetailSkeleton } from './components/CategoryDetailSkeleton';
-import { useCategoryMissions } from './hooks/useCategoryMissions';
+import { useCategoryDetail } from './hooks/useCategoryDetail';
 
 interface CategoryDetailBodyProps {
   category: MissionCategory;
 }
 
 function CategoryDetailBody({ category }: CategoryDetailBodyProps) {
-  const { data } = useCategoryMissions(category);
+  const { me, missions } = useCategoryDetail(category);
 
   return (
     <>
       <IndexMark
-        label={CATEGORY_LABEL[category]}
+        label={
+          <span className="flex flex-col items-center gap-0.5">
+            <span className="font-body text-xs text-ink-secondary">
+              {me.nickname} 님의
+            </span>
+            <span>{CATEGORY_LABEL[category]} 새틈</span>
+          </span>
+        }
         active
         activeColor={CATEGORY_BG_CLASS[category]}
         size="lg"
         className="mb-4"
       />
 
-      <CategoryMissionGrid category={category} missions={data} />
+      <CategoryMissionGrid category={category} missions={missions} />
 
       <div className="mt-10 flex justify-center">
         <Button
