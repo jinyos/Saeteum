@@ -1,6 +1,9 @@
 import type { MissionCategory } from '@saeteum/shared';
 
 export const queryKeys = {
+  me: {
+    detail: () => ['me'] as const,
+  },
   missions: {
     today: () => ['missions', 'today'] as const,
   },
