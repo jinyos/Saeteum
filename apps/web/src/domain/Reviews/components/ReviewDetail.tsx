@@ -86,8 +86,13 @@ export function ReviewDetail({
         <Woman className="absolute right-2 bottom-25 size-20 -rotate-18 text-ink-tertiary opacity-25" />
       </div>
 
-      <div className="mt-4 flex justify-center gap-12">
-        <Button href="/" variant="highlight" highlightWidth="w-14" highlightHeight="h-[85%]">
+      <div className="my-4 flex justify-center gap-12">
+        <Button
+          href="/"
+          variant="highlight"
+          highlightWidth="w-14"
+          highlightHeight="h-[85%]"
+        >
           나가기
         </Button>
         {review.editable && (

@@ -49,7 +49,7 @@ export function ReviewForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+    <form onSubmit={handleSubmit} className="flex flex-1 flex-col gap-6">
       <MissionCard content={missionContent} />
 
       <RatingInput value={rating} onChange={setRating} />
@@ -57,7 +57,7 @@ export function ReviewForm({
       <ContentInput value={content} onChange={setContent} />
       <EmotionTagInput value={emotionTags} onChange={setEmotionTags} />
 
-      <div className="mt-4 flex justify-center gap-12">
+      <div className="mt-auto mb-4 flex justify-center gap-12 pt-4">
         <Button
           href="/"
           variant="highlight"

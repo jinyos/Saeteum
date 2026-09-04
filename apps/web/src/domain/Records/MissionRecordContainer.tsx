@@ -4,7 +4,10 @@ import type { FallbackProps } from 'react-error-boundary';
 import { isApiError } from '@/api/client';
 import { Button } from '@/common/components/Button';
 import { MissionCard } from '@/common/components/MissionCard';
-import { ErrorFallback, QueryBoundary } from '@/common/components/QueryBoundary';
+import {
+  ErrorFallback,
+  QueryBoundary,
+} from '@/common/components/QueryBoundary';
 import { MissionRecordEntry } from './components/MissionRecordEntry';
 import { MissionRecordSkeleton } from './components/MissionRecordSkeleton';
 import { useMissionRecord } from './hooks/useMissionRecord';
@@ -33,7 +36,7 @@ function MissionRecordBody({ missionId }: MissionRecordBodyProps) {
   const { data } = useMissionRecord(missionId);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-1 flex-col gap-6">
       <MissionCard content={data.mission.content} label={null} padding="p-6" />
 
       <div className="flex flex-col gap-4">
@@ -42,7 +45,7 @@ function MissionRecordBody({ missionId }: MissionRecordBodyProps) {
         ))}
       </div>
 
-      <div className="mt-4 flex justify-center">
+      <div className="mt-auto mb-4 flex justify-center pt-4">
         <Button
           href={`/mypage/records/${data.mission.category}`}
           variant="highlight"
@@ -64,7 +67,7 @@ export default function MissionRecordContainer({
   missionId,
 }: MissionRecordContainerProps) {
   return (
-    <div className="mx-auto w-[85%] py-6">
+    <div className="mx-auto flex w-[85%] flex-1 flex-col py-6">
       <QueryBoundary
         pendingFallback={<MissionRecordSkeleton />}
         errorFallback={MissionRecordErrorFallback}

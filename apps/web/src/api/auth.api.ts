@@ -1,5 +1,6 @@
 import { API_BASE_URL } from '@/common/constants';
 import { ApiError } from '@/api/client';
+import { getAccessToken } from '@/lib/auth/tokenStore';
 import { PROVIDERS, type Provider } from '@saeteum/shared';
 
 const PROVIDER_LABEL: Record<Provider, string> = {
@@ -39,4 +40,15 @@ export async function exchangeCode(
 
   const body = (await res.json()) as { data: { accessToken: string } };
   return body.data;
+}
+
+export async function logout(): Promise<void> {
+  const accessToken = getAccessToken();
+
+  await fetch('/api/auth/logout', {
+    method: 'POST',
+    headers: accessToken
+      ? { Authorization: `Bearer ${accessToken}` }
+      : undefined,
+  });
 }
