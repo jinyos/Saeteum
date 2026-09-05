@@ -2,7 +2,7 @@
  * 검증 포인트:
  * 1. 사진이 없으면 사진 업로드 없이 바로 createReview를 호출한다.
  * 2. 사진이 있으면 업로드 티켓 발급 -> 업로드 -> 그 photoPath로 createReview를 호출한다.
- * 3. 성공하면 missions.today 쿼리를 무효화하고 후기 보기 화면으로 이동한다.
+ * 3. 성공하면 missions.today, stats.summary 쿼리를 무효화하고 후기 보기 화면으로 이동한다.
  * 4. REVIEW_CLOSED 에러면 자정 경과 안내 토스트를 띄운다.
  * 5. REVIEW_ALREADY_EXISTS 에러면 이미 작성했다는 토스트를 띄운다.
  * 6. REVIEW_TOO_MANY_TAGS 에러면 태그 개수 제한 안내 토스트를 띄운다.
@@ -105,7 +105,7 @@ describe('useCreateReview', () => {
   });
 
   // 3
-  it('invalidate today mission, drop the stale review cache, and navigate to the review on success', async () => {
+  it('invalidate today mission and stats, drop the stale review cache, and navigate to the review on success', async () => {
     mockedCreateReview.mockResolvedValue({ reviewId: 'review-1' });
     const { wrapper, queryClient } = createWrapper();
     const invalidateSpy = jest.spyOn(queryClient, 'invalidateQueries');
@@ -118,6 +118,9 @@ describe('useCreateReview', () => {
 
     expect(invalidateSpy).toHaveBeenCalledWith({
       queryKey: queryKeys.missions.today(),
+    });
+    expect(invalidateSpy).toHaveBeenCalledWith({
+      queryKey: queryKeys.stats.summary(),
     });
     expect(removeSpy).toHaveBeenCalledWith({
       queryKey: queryKeys.reviews.detail('draw-1'),

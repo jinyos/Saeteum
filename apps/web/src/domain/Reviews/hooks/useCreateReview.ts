@@ -46,6 +46,9 @@ export function useCreateReview() {
       void queryClient.invalidateQueries({
         queryKey: queryKeys.missions.today(),
       });
+      void queryClient.invalidateQueries({
+        queryKey: queryKeys.stats.summary(),
+      });
       queryClient.removeQueries({
         queryKey: queryKeys.reviews.detail(variables.missionDrawId),
       });

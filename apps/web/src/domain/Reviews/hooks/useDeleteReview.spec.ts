@@ -1,6 +1,6 @@
 /**
  * 검증 포인트:
- * 1. 삭제 성공하면 missions.today/reviews.detail 쿼리를 무효화하고 메인으로 이동한다.
+ * 1. 삭제 성공하면 missions.today/stats.summary 쿼리를 무효화하고, reviews.detail 캐시를 지운 뒤 메인으로 이동한다.
  * 2. 삭제 실패하면 실패 토스트를 띄운다.
  * 3. REVIEW_CLOSED 에러면 자정 경과 안내 토스트를 띄운다.
  */
@@ -58,6 +58,9 @@ describe('useDeleteReview', () => {
 
     expect(invalidateSpy).toHaveBeenCalledWith({
       queryKey: queryKeys.missions.today(),
+    });
+    expect(invalidateSpy).toHaveBeenCalledWith({
+      queryKey: queryKeys.stats.summary(),
     });
     expect(removeSpy).toHaveBeenCalledWith({
       queryKey: queryKeys.reviews.detail('draw-1'),
