@@ -7,6 +7,9 @@ export const queryKeys = {
   missions: {
     today: () => ['missions', 'today'] as const,
   },
+  stats: {
+    summary: () => ['stats', 'summary'] as const,
+  },
   reviews: {
     detail: (missionDrawId: string) =>
       ['reviews', 'detail', missionDrawId] as const,

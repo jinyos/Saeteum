@@ -1,6 +1,6 @@
 /**
  * 검증 포인트:
- * 1. 뽑기 성공하면 missions.today 쿼리를 무효화한다.
+ * 1. 뽑기 성공하면 missions.today, stats.summary 쿼리를 무효화한다.
  * 2. 뽑기 실패하면 실패 토스트를 띄운다.
  */
 import { createElement } from 'react';
@@ -36,7 +36,7 @@ describe('useDrawMission', () => {
   });
 
   // 1
-  it('invalidate the today mission query on success', async () => {
+  it('invalidate the today mission and stats queries on success', async () => {
     mockedDrawMission.mockResolvedValue({
       missionDrawId: 'draw-1',
       mission: { content: '새로운 음악 장르 들어보기' },
@@ -52,6 +52,9 @@ describe('useDrawMission', () => {
 
     expect(invalidateSpy).toHaveBeenCalledWith({
       queryKey: queryKeys.missions.today(),
+    });
+    expect(invalidateSpy).toHaveBeenCalledWith({
+      queryKey: queryKeys.stats.summary(),
     });
   });
 
