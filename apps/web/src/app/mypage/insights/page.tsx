@@ -1,10 +1,11 @@
 import { AnalysisTab } from '@/common/layouts/AnalysisTab';
+import InsightsContainer from '@/domain/Insights/InsightsContainer';
 
 export default function InsightsPage() {
   return (
-    <div>
+    <div className="flex flex-1 flex-col">
       <AnalysisTab active="insights" />
-      AI 분석 페이지
+      <InsightsContainer />
     </div>
   );
 }

@@ -15,7 +15,11 @@ const SIZE_CLASS: Record<
   IndexMarkSize,
   { root: string; label: string; bar: string }
 > = {
-  sm: { root: 'border text-xs', label: 'px-2 py-0.5', bar: 'w-2' },
+  sm: {
+    root: 'border-2 text-xs filter-[url(#hand-rough)]',
+    label: 'px-4 py-0.5',
+    bar: 'w-2',
+  },
   lg: {
     root: 'w-full border-2 text-lg bg-white filter-[url(#hand-rough)]',
     label: 'flex-1 py-3 text-center',
