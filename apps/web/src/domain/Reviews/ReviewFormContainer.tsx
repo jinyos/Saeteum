@@ -11,15 +11,15 @@ import { useCreateReview } from './hooks/useCreateReview';
 function ReviewFormBody() {
   const router = useRouter();
   const { data } = useTodayMission();
-  const { mutate, isPending } = useCreateReview();
+  const { mutate, isPending, isSuccess } = useCreateReview();
 
   const canWriteReview = data.drawn && !data.hasReview;
 
   useEffect(() => {
-    if (!canWriteReview) {
+    if (!canWriteReview && !isSuccess) {
       router.replace('/');
     }
-  }, [canWriteReview, router]);
+  }, [canWriteReview, isSuccess, router]);
 
   if (!data.drawn || !canWriteReview) {
     return null;
