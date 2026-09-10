@@ -86,6 +86,7 @@ function getKstDayKey(date: Date = new Date()): string {
 
 export interface DrawnMission {
   missionDrawId: string;
+  missionId: number;
   missionContent: string;
   category: string;
 }
@@ -107,6 +108,7 @@ export async function drawTodayMission(user: TestUser): Promise<DrawnMission> {
 
   return {
     missionDrawId: draw.id,
+    missionId: mission.id,
     missionContent: mission.content,
     category: mission.category,
   };
