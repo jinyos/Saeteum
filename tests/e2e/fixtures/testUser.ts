@@ -113,3 +113,9 @@ export async function drawTodayMission(user: TestUser): Promise<DrawnMission> {
     category: mission.category,
   };
 }
+
+export async function userExists(userId: string): Promise<boolean> {
+  const [row] = await sql`select id from users where id = ${userId}`;
+
+  return row !== undefined;
+}
