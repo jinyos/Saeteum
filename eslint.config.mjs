@@ -63,6 +63,19 @@ export default defineConfig([
     },
   },
 
+  // tests/e2e — Playwright
+  ...tseslint.configs.recommended.map((config) => ({
+    ...config,
+    files: ["tests/e2e/**/*.ts"],
+  })),
+  {
+    files: ["tests/e2e/**/*.ts"],
+    languageOptions: {
+      globals: { ...globals.node },
+      sourceType: "commonjs",
+    },
+  },
+
   noParentImports,
   eslintConfigPrettier,
 ]);
