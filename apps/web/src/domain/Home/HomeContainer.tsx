@@ -1,12 +1,13 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useOAuthCallback } from './hooks/useOAuthCallback';
 import { Spinner } from '@/common/components/Spinner';
 import LandingContainer from '@/domain/Landing/LandingContainer';
 import MissionsContainer from '@/domain/Missions/MissionsContainer';
 
-export default function HomeContainer() {
+function HomeBody() {
   const { isAuthenticated, isLoading } = useAuth();
   const { isExchanging } = useOAuthCallback();
 
@@ -23,4 +24,12 @@ export default function HomeContainer() {
   }
 
   return <MissionsContainer />;
+}
+
+export default function HomeContainer() {
+  return (
+    <Suspense fallback={null}>
+      <HomeBody />
+    </Suspense>
+  );
 }
