@@ -2,7 +2,7 @@
   "name": "saeteum",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@11.12.0",
+  "packageManager": "pnpm@11.28.9",
   "scripts": {
     "predev": "pnpm --filter @saeteum/shared build",
     "dev": "pnpm --parallel --filter=./apps/* --filter=@saeteum/shared dev",
